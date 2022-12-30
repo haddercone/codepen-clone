@@ -7,7 +7,14 @@ function App() {
   const [css, setCss] = useLocalStorage("css", "");
   const [js, setJs] = useLocalStorage("js", "");
   const [srcDoc, setsrcDoc] = useState("");
-
+  
+  const placeHolder = `
+      <html>
+      <body style="height:90vh;display:flex; justify-content:center; align-items:center;color:#2e2e2e">
+        <h1> Your code output here...</h1>
+      </body>
+      </html>
+      `
   useEffect(() => {
     const timeout = setTimeout(() => {
       setsrcDoc(`
@@ -46,7 +53,7 @@ function App() {
       </div>
       <div className="pane">
         <iframe
-          srcDoc={srcDoc}
+          srcDoc={(html === "" && css === "" && js === "") ? placeHolder : srcDoc}
           title="output"
           sandbox="allow-scripts"
           frameborder="0"
